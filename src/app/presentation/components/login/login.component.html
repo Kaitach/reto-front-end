@@ -1,0 +1,25 @@
+<div class="container mt-5 p-5 max-w-md mx-auto rounded shadow-sm text-center bg-gray-800">
+  <h2 class="text-4xl text-white font-bold">BANK SOFKA</h2>
+  <form class="mt-4" (ngSubmit)="loginCheck()" [formGroup]="formLogin">
+    <div class="mb-4">
+      <label class="block text-white font-bold mb-2" for="username">
+        Email
+      </label>
+      <input type="text" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="username" formControlName="username" placeholder="Ingrese su correo">
+    </div>
+    <div class="mb-6">
+      <label class="block text-white font-bold mb-2" for="password">
+        Password
+      </label>
+      <input formControlName="password" type="password" class="appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline" id="pwd" placeholder="Ingrese una contraseña">
+    </div>
+    <button type="submit" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" [disabled]="formLogin.invalid">Sign</button>
+    <br />
+    <br />
+    <button [routerLink]="['/login/login']" class="text-blue-500 hover:text-blue-700 font-bold">Register</button>
+    <ng-template #content let-modal>
+      <div class="modal-body"></div>
+    </ng-template>
+  </form>
+  <img (click)="onClickLogin()" class="icon inline-block" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/768px-Google_%22G%22_Logo.svg.png" alt="Google logo" style="width: 30px; height: 30px; margin-right: 10px;">
+</div>

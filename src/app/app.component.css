@@ -1,0 +1,13 @@
+app-toolbar {
+    position: fixed; /* o absolute */
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9999; /* asegura que el toolbar esté en la parte superior */
+  }
+  
+  /* Estilo para el componente debajo del toolbar */
+  router-outlet {
+    margin-top: 64px; /* ajusta el margen superior para dejar espacio para el toolbar */
+    padding-top: 16px; /* opcional - ajusta el espacio entre el toolbar y el componente debajo de él */
+  }

@@ -1,0 +1,118 @@
+<div class="container mx-auto">
+    <div class="bg-white shadow-md rounded px-8 pt-6 pb-8 mb-4">
+      <h2 class="text-2xl font-bold mb-4">User Deposit</h2>
+      <table class="table-auto">
+        <thead>
+          <tr>
+            <th class="px-4 py-2">Deposit ID</th>
+            <th class="px-4 py-2">Amount</th>
+            <th class="px-4 py-2">Reason</th>
+            <th class="px-4 py-2">Account ID</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Aquí puedes iterar sobre el array depositList para mostrar los depósitos del usuario -->
+          <tr *ngFor="let deposit of depositList">
+            <td class="border px-4 py-2">{{ deposit._id }}</td>
+            <td class="border px-4 py-2">{{ deposit.amount }}</td>
+            <td class="border px-4 py-2">{{ deposit.reason  }}</td>
+            <td class="border px-4 py-2">{{ deposit.accountId  }}</td>
+            <td class="border px-4 py-2"><button class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded"  (click)="deposit._id && deleteAccount(deposit._id)">X</button></td>
+            <td class="border px-4 py-2">
+                <button class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"  
+                        (click)="deposit._id && deposit.amount && abrirModall(deposit._id, deposit.amount, deposit.reason, deposit.accountId)">
+                  V
+                </button>
+              </td>    
+                </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="border-t border-gray-200 px-4 py-4 sm:px-6">
+    <button (click)="abrirModal()" class="block text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-400 dark:hover:bg-green-500 dark:focus:ring-green-700" type="button">
+      add deposit      </button>
+  </div>
+  <div class="border-t border-gray-200 px-4 py-4 sm:px-6">
+    <button [routerLink]="['/account']" class="block text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-400 dark:hover:bg-green-500 dark:focus:ring-green-700" type="button">
+      add account    
+      </button>
+  </div>
+
+
+
+
+
+
+
+  <!-- Main modal -->
+<!-- Main modal -->
+<div   id="popup-modal" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-full max-w-md max-h-full">
+          <!-- Modal content -->
+          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">             
+              <div class="px-6 py-6 lg:px-8">
+                  <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">ADD Deposit  </h3>
+                  <form   [formGroup]="formEdit"  class="space-y-6" action="#">
+                    <div>
+                        <label for="accountID" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Account ID</label>
+                        <input formControlName="accountID" type="text" name="accountID" id="accountID" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                    </div>
+                    
+                    <div>
+                        <label for="reason" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Reason</label>
+                        <input formControlName="reason" type="text" name="reason" id="reason" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                    </div>
+                    
+                    <div>
+                        <label for="amount" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Amount</label>
+                        <input formControlName="amount" type="number" name="amount" id="amount" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                    </div>
+                  
+                    
+                    <button  [disabled]="formEdit.invalid" (click)="createDeposit()" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Create Deposit</button>
+                    <button (click)="closeModal()" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Close</button>
+                  </form>
+              </div>
+          </div>
+    </div>
+  </div> 
+
+  
+
+  <div   id="popup-modall" tabindex="-1" class="fixed top-0 left-0 right-0 z-50 hidden p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
+    <div class="relative w-full max-w-md max-h-full">
+          <!-- Modal content -->
+          <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">             
+              <div class="px-6 py-6 lg:px-8">
+                  <h3 class="mb-4 text-xl font-medium text-gray-900 dark:text-white">update Deposit  </h3>
+                  <form   [formGroup]="formedit"  class="space-y-6" action="#">
+                  
+                    
+                    <div>
+                        <label for="reason" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Reason</label>
+                        <input formControlName="reason" type="text" name="reason" id="reason" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-600 dark:border-gray-500 dark:placeholder-gray-400 dark:text-white" required>
+                    </div>
+                    
+                 
+                  
+                    
+                    <button  (click)="updateDeposit()" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Update Deposit</button>
+                    <button (click)="closeModall()" class="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Close</button>
+                  </form>
+              </div>
+          </div>
+    </div>
+  </div> 

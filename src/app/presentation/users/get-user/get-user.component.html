@@ -1,0 +1,24 @@
+<div class="flex justify-center items-center flex-col">
+    <p class="text-2xl font-bold">get-user works!</p>
+    <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="get()">get</button>
+  
+    <table *ngIf="users" class="table-auto mt-4">
+      <thead>
+        <tr>
+          <th class="px-4 py-2">ID</th>
+          <th class="px-4 py-2">Name</th>
+          <th class="px-4 py-2">Email</th>
+          <th class="px-4 py-2">Password</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let user of users">
+          <td class="border px-4 py-2">{{ user.id }}</td>
+          <td class="border px-4 py-2">{{ user.name }}</td>
+          <td class="border px-4 py-2">{{ user.email }}</td>
+          <td class="border px-4 py-2">{{ user.password }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

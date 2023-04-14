@@ -1,0 +1,25 @@
+<div class="container mt-5 mx-auto px-4">
+  <h2 class="text-center text-3xl font-bold mb-6">Registro</h2>
+  <form class="w-full max-w-sm mx-auto" [formGroup]="formRegister">
+    <div class="mb-4">
+      <label for="document" class="block text-gray-700 font-bold mb-2">Documento:</label>
+      <input formControlName="document" type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="document" placeholder="Ingrese su documento">
+    </div>
+    <div class="mb-4">
+      <label for="name" class="block text-gray-700 font-bold mb-2">Nombre completo:</label>
+      <input formControlName="name" type="text" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="name" placeholder="Ingrese su nombre completo">
+    </div>
+    <div class="mb-4">
+      <label for="email" class="block text-gray-700 font-bold mb-2">Email:</label>
+      <input formControlName="email" type="email" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="email" placeholder="Ingrese su correo electrónico">
+    </div>
+    <div class="mb-6">
+      <label for="pwd" class="block text-gray-700 font-bold mb-2">Contraseña:</label>
+      <input formControlName="password" type="password" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" id="pwd" placeholder="Ingrese una contraseña">
+    </div>
+
+    <button (click)="signUp()" class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="button">Enviar</button>
+    <img class="icon cursor-pointer" (click)="onClickLogin()" src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/768px-Google_%22G%22_Logo.svg.png" alt="Google logo" style="width: 30px; height: 30px; margin-right: 10px;">
+
+  </form>
+</div>
