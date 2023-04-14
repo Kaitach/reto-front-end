@@ -1,13 +1,13 @@
 import { AccountRepository, IAccountModel } from 'src/app/domain';
-import { AccountUseCaseProviders } from './../../../data/factory/accountFactory';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { userUseCaseProviders } from 'src/app/data/factory/userfactory';
 import { UserModel, UserRepository } from 'src/app/domain';
 import { UserEntity } from 'src/app/data';
 import { Router } from '@angular/router';
-import { AccountComponent } from '../../components/account/account.component';
-import { AlertsService } from '../../shared';
+import { AccountUseCaseProviders } from 'src/app/data/factory/accountFactory';
+import { AlertsService } from 'src/app/presentation/shared';
+
 
 @Component({
   selector: 'app-profile',

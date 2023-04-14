@@ -20,7 +20,7 @@ export class UserImplementationRepository extends UserRepository {
   }
   login(email: string, password: string): Observable<any> {
     const body = { email, password };
-    return this.http.post('http://localhost:3000/users/login', body, { responseType: 'text' })
+    return this.http.post('https://banco-backend.onrender.com/users/login', body, { responseType: 'text' })
       .pipe(
         map(response => {
           const token = response;
@@ -36,15 +36,13 @@ export class UserImplementationRepository extends UserRepository {
 
   createUser(user: UserModel): Observable<UserModel> {
     console.log(user)
-    return this.http.post<UserEntity>('http://localhost:3000/users', user);
+    return this.http.post<UserEntity>('https://banco-backend.onrender.com/users', user);
 
     
   }
   updateUser(id: string, user: UserModel): Observable<UserModel> {
-    console.log('afafasf')
-    console.log(id)
-    console.log(user)
-    return this.http.put<UserEntity>(`http://localhost:3000/users/${id}`, user);
+   
+    return this.http.put<UserEntity>(`https://banco-backend.onrender.com/users/${id}`, user);
   }
 
   getUserById(id: string): Observable<UserModel> {
@@ -52,9 +50,10 @@ export class UserImplementationRepository extends UserRepository {
       .get<UserEntity>(`https://banco-backend.onrender.com/users/${id}`)
       .pipe(map(this.userMapper.mapFrom));
   }
-  deleteUserById(id: string): Observable<boolean> {
+  deleteUserById(id: string): Observable<any> {
     const url = `https://banco-backend.onrender.com/users/${id}`;
-    return this.http.delete<boolean>(url);
+    const options = { body: { contraseña: 'abretesesamo' } };
+    return this.http.delete(url, options);
   }
   getAllUsers(): Observable<UserModel[]> {
   console.log("getAllUsers")

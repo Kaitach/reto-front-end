@@ -3,5 +3,5 @@ export interface IDepositModel {
     userId: string;
     amount: number;
     reason: string;
-    _id: string 
+    _id?: string 
   }

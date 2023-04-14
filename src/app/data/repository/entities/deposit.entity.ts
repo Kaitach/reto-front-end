@@ -3,5 +3,5 @@ export interface DepositEntity {
     userId: string;
     amount: number;
     reason: string;
-    _id: string;
+    _id?: string;
   }

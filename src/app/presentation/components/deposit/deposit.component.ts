@@ -80,14 +80,13 @@ formEdit = this.formBuilder.group({
 createDeposit(){
 
 const account:IDepositModel = {
-  _id: '',
   amount: this.formEdit.value.amount as number,
   accountId: this.formEdit.value.accountID as string,
   reason: this.formEdit.value.reason as string,
   userId: this.user.id as string,
 }
 
-console.log(account)
+
 this.factory.CreateDeposit.useFactory(this.depositRepository).execute(account).subscribe()
 this.router.navigate(['/account']);
 

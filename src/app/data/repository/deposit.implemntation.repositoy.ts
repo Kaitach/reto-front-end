@@ -16,8 +16,7 @@ export class DepositImplementationRepository extends DepositRepository {
 
     createDeposit(deposit: IDepositModel): Observable<IDepositModel> {
         return this.http
-          .post<IDepositModel>('https://banco-backend.onrender.com/deposit', this.depositMapper.mapTo(deposit))
-          .pipe(map(this.depositMapper.mapFrom));
+          .post<IDepositModel>('https://banco-backend.onrender.com/deposit',deposit)
       }
     
       updateDeposit(id: string, deposit: IDepositModel): Observable<IDepositModel> {

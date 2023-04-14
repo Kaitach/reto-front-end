@@ -5,7 +5,7 @@ import { LoginGuard } from './presentation/tools/guard';
 
 const routes: Routes = [{
   path: 'user',
-  loadChildren: () => import('../app/presentation/users/users.module').then(m => m.UsersModule) , canActivate: [LoginGuard]
+  loadChildren: () => import('../app/presentation/components/users/users.module').then(m => m.UsersModule) , canActivate: [LoginGuard]
 },
 {
   path: 'login',
