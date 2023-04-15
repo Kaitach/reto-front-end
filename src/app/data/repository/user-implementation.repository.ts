@@ -24,7 +24,6 @@ export class UserImplementationRepository extends UserRepository {
       .pipe(
         map(response => {
           const token = response;
-          console.log(token);
           // Guardar el token en el local storage
           localStorage.setItem('token', token);
           return token;
@@ -35,7 +34,6 @@ export class UserImplementationRepository extends UserRepository {
   
 
   createUser(user: UserModel): Observable<UserModel> {
-    console.log(user)
     return this.http.post<UserEntity>('https://banco-backend.onrender.com/users', user);
 
     
@@ -56,7 +54,6 @@ export class UserImplementationRepository extends UserRepository {
     return this.http.delete(url, options);
   }
   getAllUsers(): Observable<UserModel[]> {
-  console.log("getAllUsers")
     const url = 'https://banco-backend.onrender.com/users';
     return this.http.get<UserEntity[]>(url)
   }

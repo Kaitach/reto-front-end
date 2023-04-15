@@ -50,7 +50,6 @@ export class ProfileComponent implements OnInit {
     this.getUserAccount();
 
  
-    console.log(this.userData);
   }
 
   openModal() {
@@ -70,11 +69,7 @@ export class ProfileComponent implements OnInit {
 
   }
 
-  ngOnChanges(): void {
-    console.log('ngOnChanges')
-   this.getUserAccount()
-    
-  }
+ 
 
   changeDataAccount() {
     if (this.formEdit) {
@@ -89,7 +84,6 @@ export class ProfileComponent implements OnInit {
         user: this.user,
       })
       .subscribe((data) => {
-        console.log(data);
       });
     this.getUserAccount();
     this.closeModal();
@@ -112,4 +106,5 @@ export class ProfileComponent implements OnInit {
     localStorage.clear();
     this.router.navigate(['/login']);
   }
+
 }

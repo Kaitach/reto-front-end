@@ -36,22 +36,21 @@ constructor(    private router: Router,    public AlertsService: AlertsService,
     this.getDepositByUser()
   }
 
-  abrirModal() {
+  abrirModal():void {
     const modal = document.getElementById('popup-modal');
     modal?.classList.add('block');
     modal?.classList.remove('hidden');
   }
 
 
-closeModal(){
+closeModal():void {
   const modal = document.getElementById('popup-modal');
   modal?.classList.remove('block');
   modal?.classList.add('hidden');
 }
 
 
-abrirModall(id: string, amount: number, reason: string, accountId: string ) {
-  console.log('abrir modall')
+abrirModall(id: string, amount: number, reason: string, accountId: string ):void {
   this.accountId = accountId
   this.reason = reason;
   this.id = id,
@@ -77,7 +76,7 @@ formEdit = this.formBuilder.group({
 
     
  
-createDeposit(){
+createDeposit():void{
 
 const account:IDepositModel = {
   amount: this.formEdit.value.amount as number,
@@ -94,7 +93,7 @@ this.router.navigate(['/account']);
 
 }
 
-getDepositByUser(){
+getDepositByUser():void{
 
   this.factory.getByUser.useFactory(this.depositRepository)
   .execute(this.user.id)
@@ -135,7 +134,6 @@ getDepositByUser(){
 
 
 updateDeposit(){
-  console.log("gola")
   const account:IDepositModel = {
     accountId: this.accountId,
     amount: this.amount,

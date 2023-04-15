@@ -62,6 +62,7 @@ export class AccountComponent implements OnInit {
     localStorage.setItem('accountList', JSON.stringify(this.accountList))
   }
 
+  
   async deleteAccount(id:string){
     const deleteAccount = this.AlertsService.alertError()
 
@@ -96,7 +97,6 @@ updateAccountList() {
       user: this.user,
     })
     .subscribe((data) => {
-      console.log(data);
     });
 }
   

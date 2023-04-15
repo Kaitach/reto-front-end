@@ -7,10 +7,7 @@ export class CreateUserUseCase implements UseCase<UserModel, UserModel> {
   constructor(private UserRepository: UserRepository) {}
 
   execute(user: UserModel): Observable<UserModel> {
-    console.log('---------------------------');
-    
-    console.log(user);
-    console.log('---------------------------');
+
 
     return this.UserRepository.createUser(user);
   }

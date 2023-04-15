@@ -1,17 +1,17 @@
-import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
-
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { ToolbarrComponent } from './toolbarr.component';
-import { ToolbarrModule } from './toolbarr.module';
 
 describe('ToolbarrComponent', () => {
   let component: ToolbarrComponent;
   let fixture: ComponentFixture<ToolbarrComponent>;
 
-  beforeEach(waitForAsync(() => {
-    TestBed.configureTestingModule({
-      imports: [ToolbarrModule],
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [RouterTestingModule],
+      declarations: [ToolbarrComponent],
     }).compileComponents();
-  }));
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ToolbarrComponent);
@@ -19,7 +19,9 @@ describe('ToolbarrComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should create', () => {
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
+
+
 });

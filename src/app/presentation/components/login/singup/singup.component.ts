@@ -46,17 +46,13 @@ export class SingupComponent  {
 
   signUp() {
     const formValues = this.mapFormValuesToObject();
-        console.log(formValues)
 
     this.factory.createUser.useFactory(this.userRepository).execute(formValues).subscribe(
         (data) => {
           this.router.navigate(['/user']);
-
-          // manejo de la respuesta exitosa aquí
         },
         (error) => {
           console.error(error);
-          // manejo de errores aquí
         }
       );
       this.router.navigate(['/user']);

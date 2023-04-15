@@ -14,8 +14,7 @@ export class TransferComponent implements OnInit {
 
  factory = transferUseCaseProviders
  accounts:IAccountModel [] = []
- constructor(    private router: Router,    public AlertsService: AlertsService,
-
+ constructor(    public AlertsService: AlertsService,
   private formBuilder: FormBuilder,  private transferRepository:TransferRepository  ) {}
   ngOnInit(): void {
     const account = localStorage.getItem('accountList');

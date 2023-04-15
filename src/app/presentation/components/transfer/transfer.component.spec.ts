@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { TransferComponent } from './transfer.component';
 
 describe('TransferComponent', () => {
@@ -11,13 +10,14 @@ describe('TransferComponent', () => {
       declarations: [ TransferComponent ]
     })
     .compileComponents();
-
-    fixture = TestBed.createComponent(TransferComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
 
-  it('should create', () => {
+  beforeEach(() => {
+    fixture = TestBed.createComponent(TransferComponent);
+    component = fixture.componentInstance;
+  });
+
+  it('should create the component', () => {
     expect(component).toBeTruthy();
   });
 });
