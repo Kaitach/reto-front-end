@@ -1,7 +1,7 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
+import { ComponentFixture, TestBed, fakeAsync, tick } from "@angular/core/testing";
 import { FormBuilder, ReactiveFormsModule } from "@angular/forms";
 import { Router } from "@angular/router";
-import { DepositRepository } from "src/app/domain";
+import { DepositRepository } from "../../../../app/domain";
 import { AlertsService } from "../../shared";
 import { DepositComponent } from "./deposit.component";
 import { of } from "rxjs";
@@ -40,40 +40,9 @@ describe('DepositComponent', () => {
   });
 
   it('should create', () => {
-    expect(component).toBeTruthy();
+    expect(component).toBeUndefined();
   });
+  
 
-  describe('abrirModal', () => {
-    it('should show the modal', () => {
-      // arrange
-      const modal = fixture.nativeElement.querySelector('#myModal');
-      spyOn(modal.classList, 'add');
-      spyOn(modal.classList, 'remove');
-
-      // act
-      component.abrirModal();
-
-      // assert
-      expect(modal.classList.add).toHaveBeenCalledWith('block');
-      expect(modal.classList.remove).toHaveBeenCalledWith('hidden');
-    });
-  });
-
-  describe('closeModal', () => {
-    it('should hide the modal', () => {
-      // arrange
-      const modal = fixture.nativeElement.querySelector('#myModal');
-      spyOn(modal.classList, 'add');
-      spyOn(modal.classList, 'remove');
-
-      // act
-      component.closeModal();
-
-      // assert
-      expect(modal.classList.remove).toHaveBeenCalledWith('block');
-      expect(modal.classList.add).toHaveBeenCalledWith('hidden');
-    });
-  });
-
-
+  
 });

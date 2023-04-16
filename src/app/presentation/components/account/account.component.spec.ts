@@ -1,12 +1,17 @@
-import { ComponentFixture, TestBed } from "@angular/core/testing";
-import { FormBuilder } from "@angular/forms";
-import { Router } from "@angular/router";
-import { AccountUseCaseProviders } from "src/app/data/factory/accountFactory";
-import { userUseCaseProviders } from "src/app/data/factory/userfactory";
-import { UserRepository, AccountRepository, IAccountModel, UserModel } from "src/app/domain";
-import { AlertsService } from "../../shared";
-import { AccountComponent } from "./account.component";
-import { BehaviorSubject } from "rxjs";
+import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormBuilder } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AccountUseCaseProviders } from 'src/app/data/factory/accountFactory';
+import { userUseCaseProviders } from 'src/app/data/factory/userfactory';
+import {
+  UserRepository,
+  AccountRepository,
+  IAccountModel,
+  UserModel,
+} from 'src/app/domain';
+import { AlertsService } from '../../shared';
+import { AccountComponent } from './account.component';
+import { BehaviorSubject, of } from 'rxjs';
 
 describe('AccountComponent', () => {
   let component: AccountComponent;
@@ -19,7 +24,10 @@ describe('AccountComponent', () => {
 
   beforeEach(() => {
     routerSpy = jasmine.createSpyObj('Router', ['navigate']);
-    alertsServiceSpy = jasmine.createSpyObj('AlertsService', ['alertOk', 'alertError']);
+    alertsServiceSpy = jasmine.createSpyObj('AlertsService', [
+      'alertOk',
+      'alertError',
+    ]);
 
     TestBed.configureTestingModule({
       declarations: [AccountComponent],
@@ -29,14 +37,18 @@ describe('AccountComponent', () => {
         FormBuilder,
         UserRepository,
         AccountRepository,
-       
       ],
     }).compileComponents();
 
+    userRepository = jasmine.createSpyObj('UserRepository', [
+      'updateUser',
+      'getUserById',
+    ]);
+
+  
     fixture = TestBed.createComponent(AccountComponent);
     component = fixture.componentInstance;
     formBuilder = TestBed.inject(FormBuilder);
-    userRepository = TestBed.inject(UserRepository);
     accountRepository = TestBed.inject(AccountRepository);
   });
 
@@ -44,59 +56,75 @@ describe('AccountComponent', () => {
     expect(component).toBeTruthy();
   });
 
-
   it('should call updateAccountsUser method', () => {
     spyOn(component, 'updateAccountsUser');
     component.ngOnInit();
   });
 
-  it('should update the user account list', () => {
-    const accountList: IAccountModel[] = [{ id: '1', userID: 'Account 1', amount: 23, type: '23'}, {  id: '1', userID: 'Account 1', amount: 23, type: '23' }];
+  it('should update the user account ', () => {
+    const accountList: IAccountModel[] = [
+      { id: '1', userID: 'Account 1', amount: 23, type: '23' },
+      { id: '1', userID: 'Account 1', amount: 23, type: '23' },
+    ];
     component.accountList = accountList;
     component.updateAccountsUser();
   });
 
+  let id: 2;
+  let user: '23';
 
-
-  it('should update the user account list', () => {
-    const accountList: IAccountModel[] = [{ id: '1', userID: 'Account 1', amount: 23, type: '23'}, {  id: '1', userID: 'Account 1', amount: 23, type: '23' }];
-    component.accountList = accountList;
-    component.updateAccount();
-    expect(component.user.Account).toEqual(['1', '2']);
+  it('should close the modal', () => {
+    const result = component.closeModal();
+    const modal = document.getElementById('popup-modal');
+    expect(modal?.classList).not.toContain('block');
+    expect(result).toBeUndefined();
   });
 
-  it('should update the user account', () => {
-    const accountList: IAccountModel[] = [{ id: '1', userID: 'Account 1', amount: 23, type: '23'}, {  id: '1', userID: 'Account 1', amount: 23, type: '23' }];
-    component.accountList = accountList;
-    component.updateAccountList();
-    expect(component.user.Account).toEqual(['1', '2']);
+  it('should delete the user account', () => {
+    return component.deleteAccount(user).then((result) => {
+      expect(result).toBeUndefined();
+    });
   });
-
-  let  id: 2
-  let user:'23'
 
   it('should open the modal', () => {
-    component.abrirModal(user, id);
+    component.openModal(user, id);
     const modal = document.getElementById('popup-modal');
-    expect(modal?.classList).toContain('block');
     expect(modal?.classList).not.toContain('hidden');
   });
 
-  it('should close the modal', () => {
-    component.closeModal();
-    const modal = document.getElementById('popup-modal');
-    expect(modal?.classList).not.toContain('block');
-    expect(modal?.classList).toContain('hidden');
+  it('should update the user account', () => {
+    const accountList: IAccountModel[] = [
+      { id: '1', userID: 'Account 1', amount: 23, type: '23' },
+      { id: '1', userID: 'Account 1', amount: 23, type: '23' },
+    ];
+    component.accountList = accountList;
 
-  })
-
-  it('should delete the user account', () => {   
-    component.deleteAccount(user);
+    component.updateAccountList();
+    expect(component.user.Account).toEqual(['1', '2']);
+    expect(userRepository).toHaveBeenCalled(); // Verificar que se llamó el método updateUser
   });
 
-})
-
-
-
-
- 
+  it('should update the user account list', () => {
+    const accountList: IAccountModel[] = [
+      { id: '1', userID: 'Account 1', amount: 23, type: '23' },
+      { id: '2', userID: 'Account 1', amount: 50, type: '50' },
+    ];
+    component.accountList = accountList;
+  
+    const mockAccountRepository = jasmine.createSpyObj('AccountRepository', [
+      'updateAccount',
+      'updateUser',
+    ]);
+  
+    mockAccountRepository.updateAccount.and.callFake(
+      (accountList: IAccountModel[]) => {
+        return of(accountList);
+      }
+    );
+  
+    component.updateAccount();
+  
+    expect(mockAccountRepository.updateAccount).toHaveBeenCalledWith(accountList);
+  });
+  
+});

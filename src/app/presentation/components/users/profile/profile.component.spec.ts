@@ -31,6 +31,7 @@ describe('ProfileComponent', () => {
   });
 
   beforeEach(() => {
+    userRepository = jasmine.createSpyObj('UserRepository', ['getUserById', 'updateUser', 'deleteUserById', 'getUserById']);
     fixture = TestBed.createComponent(ProfileComponent);
     component = fixture.componentInstance;
   });
@@ -110,12 +111,15 @@ describe('ProfileComponent', () => {
   it('cmponent', () => {
     
     component.getUserAccount()
+
   })
   it('deleteUser', () => {
     component.deleteUser()
+
   })
   it('changeDataAccount', () => {
     component.changeDataAccount()
+
   })
   
 

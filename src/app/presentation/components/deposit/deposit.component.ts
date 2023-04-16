@@ -36,7 +36,7 @@ constructor(    private router: Router,    public AlertsService: AlertsService,
     this.getDepositByUser()
   }
 
-  abrirModal():void {
+  openModal():void {
     const modal = document.getElementById('popup-modal');
     modal?.classList.add('block');
     modal?.classList.remove('hidden');
@@ -50,7 +50,7 @@ closeModal():void {
 }
 
 
-abrirModall(id: string, amount: number, reason: string, accountId: string ):void {
+openModall(id: string, amount: number, reason: string, accountId: string ):void {
   this.accountId = accountId
   this.reason = reason;
   this.id = id,

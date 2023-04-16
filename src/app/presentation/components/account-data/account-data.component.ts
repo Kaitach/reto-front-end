@@ -45,21 +45,21 @@ export class AccountDataComponent implements OnInit {
     });
 
   
-  abrirModal() {
+  openModal():void {
     const modal = document.getElementById('popup-modal');
     modal?.classList.add('block');
     modal?.classList.remove('hidden');
   }
 
 
-closeModal(){
+closeModal():void{
   const modal = document.getElementById('popup-modal');
   modal?.classList.remove('block');
   modal?.classList.add('hidden');
 }
 
 
-getUserAccounts(){
+getUserAccounts():void{
   for (let i = 0; i < this.user.Account.length; i++) {  
     this.factoryAccount.getAccountById.useFactory(this.accountRepository)
     .execute(this.user.Account[i]).subscribe({
@@ -77,7 +77,7 @@ getUserAccounts(){
 }
 accountListSubject = new BehaviorSubject<IAccountModel[]>(this.accountList);
 
-createAccount(){
+createAccount():void{
 
   const account:IAccountModel = {
     amount: 0,

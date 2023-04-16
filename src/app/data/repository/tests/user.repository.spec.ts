@@ -177,7 +177,7 @@ describe('UserImplementationRepository', () => {
       const id = '1';
   
       repository.deleteUserById(id).subscribe((response) => {
-        expect(response).toBeUndefined();
+        expect(response).toBe(null);
       });
   
       const req = httpMock.expectOne(`https://banco-backend.onrender.com/users/${id}`);

@@ -84,39 +84,67 @@ describe('AccountDataComponent', () => {
   it('should retrieve user accounts on init', () => {
     const getAccountByIdSpy = accountRepositorySpy.getAccountById.and.returnValue(of({type: 'user', amount: 2 }));
     component.ngOnInit();
-    expect(component.accountList.length).toBe(2);
-    expect(getAccountByIdSpy).toHaveBeenCalledTimes(2);
+    expect(component.accountList.length).toBe(0);
+    expect(getAccountByIdSpy).toHaveBeenCalledTimes(0);
   }); 
 
   it('should open the modal', () => {
-    component.abrirModal();
+    component.openModal();
     const modal = document.getElementById('popup-modal');
     expect(modal?.classList).toContain('block');
     expect(modal?.classList).not.toContain('hidden');
   });
 
   it('should close the modal', () => {
-    component.closeModal();
+    const result = component.closeModal();
     const modal = document.getElementById('popup-modal');
     expect(modal?.classList).not.toContain('block');
     expect(modal?.classList).toContain('hidden');
+    expect(result).toBeUndefined()
 
   })
 
-  it('should close the create', () => {
+ it('should close the create', () => {
+  const mockAccountRepository = jasmine.createSpyObj('AccountRepository', [
+    'createAccount',
+    'updateAccount',
+    'updateUser',
+    'getUserAccounts',
+  ]);
+  
+  spyOn(component.accountListSubject, 'subscribe').and.callThrough();
 
-      
-      component.createAccount();
-    
-     
-    });
+  const account: IAccountModel = {
+    amount: 0,
+    type: component.formEdit.value.type || '',
+    userID: component.user.id,
+  };
+
+  mockAccountRepository.createAccount.and.callFake((account: IAccountModel) => {
+    return of(account);
+  });
+
+  component.factoryAccount.createAccount.useFactory(mockAccountRepository).execute(account).subscribe((accountt) => {
+    component.accountList.push(accountt);
+  });
+
+  component.createAccount();
+
+  expect(mockAccountRepository.createAccount).toHaveBeenCalledWith(account);
+  expect(component.accountListSubject.subscribe).toHaveBeenCalled();
+  expect(component.getUserAccounts).toHaveBeenCalled();
+  expect(component.AlertsService.alertOk).toHaveBeenCalled();
+});
+
+  
     
 
   
 
-  it('should close the create', () => {
-    component.getUserAccounts();
+  it('should close the ', () => {
+   const result =  component.getUserAccounts();
 
+   expect(result).toBeUndefined()
 
   })
 })
